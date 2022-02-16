@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="airbridge-cordova-sdk"
+    version="1.3.4"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<name>airbridge-cordova-sdk</name>
+<description>Airbridge SDK for cordova</description>
+<author>ab180</author>
+
+<keywords>airbridge, install attribution</keywords>
+
+<dependency id="es6-promise-plugin" version="4.2.2" />
+
+<!--main-->
+<js-module name="Airbridge" src="www/Airbridge.js">
+    <clobbers target="Airbridge" />
+</js-module>
+
+<!--module-->
+<js-module name="Deeplink" src="www/Deeplink.js"/>
+<js-module name="Event" src="www/Event.js"/>
+<js-module name="State" src="www/State.js"/>
+<js-module name="Placement" src="www/Placement.js"/>
+
+<!--tool-->
+<js-module name="tool/_" src="www/tool/_.js"/>
+<js-module name="tool/Log" src="www/tool/Log.js"/>
+<js-module name="tool/run" src="www/tool/run.js"/>
+
+<!--typedef-->
+<js-module name="typedef/EventOption" src="www/typedef/EventOption.js"/>
+<js-module name="typedef/Product" src="www/typedef/Product.js"/>
+<js-module name="typedef/User" src="www/typedef/User.js"/>
+
+<!--node_module-->
+<js-module name="../lib/lodash.isfunction/index" src="www/lib/lodash.isfunction/index.js"/>
+<js-module name="../lib/lodash.isplainobject/index" src="www/lib/lodash.isplainobject/index.js"/>
+<js-module name="../lib/lodash.isstring/index" src="www/lib/lodash.isstring/index.js"/>
+
+<platform name="ios">
+    <config-file parent="/*" target="config.xml">
+        <feature name="AirbridgeDeeplink">
+            <param name="ios-package" value="AirbridgeDeeplink" />
+        </feature>
+        <feature name="AirbridgeEvent">
+            <param name="ios-package" value="AirbridgeEvent" />
+        </feature>
+        <feature name="AirbridgeState">
+            <param name="ios-package" value="AirbridgeState" />
+        </feature>
+        <feature name="AirbridgePlacement">
+            <param name="ios-package" value="AirbridgePlacement" />
+        </feature>
+    </config-file>
+
+    <header-file src="src/ios/AirbridgeCO.h" />
+    <source-file src="src/ios/AirbridgeCO.m" />
+    <header-file src="src/ios/AirbridgeDeeplink.h" />
+    <source-file src="src/ios/AirbridgeDeeplink.m" />
+    <header-file src="src/ios/AirbridgeEvent.h" />
+    <source-file src="src/ios/AirbridgeEvent.m" />
+    <header-file src="src/ios/AirbridgeState.h" />
+    <source-file src="src/ios/AirbridgeState.m" />
+    <header-file src="src/ios/AirbridgePlacement.h" />
+    <source-file src="src/ios/AirbridgePlacement.m" />
+    <header-file src="src/ios/ACOGet.h" />
+    <source-file src="src/ios/ACOGet.m" />
+    <header-file src="src/ios/ACOConfigReader.h" />
+    <source-file src="src/ios/ACOConfigReader.m" />
+    <header-file src="src/ios/ACOMacro.h" />
+
+    <!-- for cordova-ios-4.4.0 -->
+    <!--<framework src="AirBridge" type="podspec" spec="1.18.0" />
+    <framework weak="true" src="AdSupport.framework" />
+    <framework weak="true" src="iAd.framework" />
+    <framework weak="true" src="CoreTelephony.framework" />
+    <framework weak="true" src="StoreKit.framework" />
+    <framework weak="true" src="AppTrackingTransparency.framework" />
+    <framework weak="true" src="AdServices.framework" />-->
+    <!-- for cordova-ios-5.0.0 -->
+    <podspec>
+        <config>
+            <source url="https://cdn.cocoapods.org/"/>
+        </config>
+        <pods>
+            <pod name="AirBridge" spec="1.18.0" />
+        </pods>
+    </podspec>
+</platform>
+
+<platform name="android">
+    <config-file parent="/*" target="config.xml">
+        <feature name="AirbridgeDeeplink">
+            <param name="android-package" value="co.ab180.airbridge.cordova.AirbridgeDeeplink" />
+        </feature>
+        <feature name="AirbridgeEvent">
+            <param name="android-package" value="co.ab180.airbridge.cordova.AirbridgeEvent" />
+        </feature>
+        <feature name="AirbridgeState">
+            <param name="android-package" value="co.ab180.airbridge.cordova.AirbridgeState" />
+        </feature>
+        <feature name="AirbridgePlacement">
+            <param name="android-package" value="co.ab180.airbridge.cordova.AirbridgePlacement" />
+        </feature>
+    </config-file>
+
+    <config-file parent="/manifest" target="AndroidManifest.xml">
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </config-file>
+        
+    <source-file src="src/android/AirbridgeCO.java" target-dir="src/co/ab180/airbridge/cordova" />
+    <source-file src="src/android/AirbridgeDeeplink.java" target-dir="src/co/ab180/airbridge/cordova" />
+    <source-file src="src/android/AirbridgeEvent.java" target-dir="src/co/ab180/airbridge/cordova" />
+    <source-file src="src/android/AirbridgeState.java" target-dir="src/co/ab180/airbridge/cordova" />
+    <source-file src="src/android/AirbridgePlacement.java" target-dir="src/co/ab180/airbridge/cordova" />
+    <source-file src="src/android/ConfigReader.java" target-dir="src/co/ab180/airbridge/cordova" />
+    <source-file src="src/android/Get.java" target-dir="src/co/ab180/airbridge/cordova" />
+
+    <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+</platform>
+
+<hook type="after_plugin_add" src="scripts/copy-config.js" />
+<hook type="after_prepare" src="scripts/copy-config.js" />
+
+</plugin>
