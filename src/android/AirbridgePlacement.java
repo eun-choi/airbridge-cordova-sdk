@@ -15,11 +15,9 @@ public class AirbridgePlacement extends CordovaPlugin {
     // cordova method
     //
 
-    private void click(@Nonnull String trackingLink,
-                       @Nullable String deeplink,
-                       @Nullable String fallback)
+    private void click(@Nonnull String trackingLink)
     {
-        Airbridge.click(trackingLink, deeplink, fallback, null);
+        Airbridge.click(trackingLink);
     }
 
     private void impression(@Nonnull String trackingLink)
@@ -44,7 +42,7 @@ public class AirbridgePlacement extends CordovaPlugin {
     private boolean execute0(String action, JSONArray args, CallbackContext callbackContext) throws Exception {
         switch (action) {
             case "click":
-                click(args.optString(0), args.optString(1), args.optString(2));
+                click(args.optString(0));
                 break;
             case "impression":
                 impression(args.optString(0));

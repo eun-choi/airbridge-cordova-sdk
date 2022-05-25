@@ -20,7 +20,7 @@ function Placement() {}
  * @param {string} [fallback=null] is opened when fail on deeplink (spare for network-fail)
  * @return {Promise<void>}
  */
-Placement.prototype.click = function(trackingLink, deeplink, fallback) {
+Placement.prototype.click = function(trackingLink) {
     Log.info('click tracking link');
 
     if (_.isString(trackingLink) === false) {
@@ -39,7 +39,7 @@ Placement.prototype.click = function(trackingLink, deeplink, fallback) {
     }
 
 
-    return run('AirbridgePlacement', 'click', [trackingLink, deeplink, fallback]).catch(function () { Log.fail('click'); });
+    return run('AirbridgePlacement', 'click', [trackingLink]).catch(function () { Log.fail('click'); });
 };
 
 /**

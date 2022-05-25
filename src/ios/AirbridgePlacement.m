@@ -18,14 +18,17 @@
 
 - (void)click:(CDVInvokedUrlCommand*)command {
     NSString* trackingLink = [ACOGet type:NSString.class array:command.arguments index:0];
-    NSString* deeplink = [ACOGet type:NSString.class array:command.arguments index:1];
-    NSString* fallback = [ACOGet type:NSString.class array:command.arguments index:2];
     
     if (trackingLink == nil) {
         cordovaFail(self, command, @"trackingLink is nil");
     }
+
+    NSURL* url = [NSURL URLWithString:trackingLink];
+    if (url == nil) {
+        cordovaFail(self, command, @"trackingLink is not url form");
+    }
     
-    [AirBridge.placement click:trackingLink deeplink:deeplink fallback:fallback];
+    [AirBridge.placement click:url completion:nil];
     
     cordovaSuccess(self, command);
 }
@@ -36,8 +39,13 @@
     if (trackingLink == nil) {
         cordovaFail(self, command, @"trackingLink is nil");
     }
+
+    NSURL* url = [NSURL URLWithString:trackingLink];
+    if (url == nil) {
+        cordovaFail(self, command, @"trackingLink is not url form");
+    }
     
-    [AirBridge.placement impression:trackingLink];
+    [AirBridge.placement impression:url completion:nil];
     
     cordovaSuccess(self, command);
 }
