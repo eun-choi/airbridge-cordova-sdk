@@ -70,7 +70,7 @@
     <header-file src="src/ios/ACOMacro.h" />
 
     <!-- for cordova-ios-4.4.0 -->
-    <!--<framework src="AirBridge" type="podspec" spec="1.18.0" />
+    <!--<framework src="AirBridge" type="podspec" spec="1.24.0" />
     <framework weak="true" src="AdSupport.framework" />
     <framework weak="true" src="iAd.framework" />
     <framework weak="true" src="CoreTelephony.framework" />

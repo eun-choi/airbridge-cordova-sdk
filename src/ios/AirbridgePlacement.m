@@ -28,7 +28,7 @@
         cordovaFail(self, command, @"trackingLink is not url form");
     }
     
-    [AirBridge.placement click:url completion:nil];
+    [AirBridge.placement click:url];
     
     cordovaSuccess(self, command);
 }
@@ -45,7 +45,7 @@
         cordovaFail(self, command, @"trackingLink is not url form");
     }
     
-    [AirBridge.placement impression:url completion:nil];
+    [AirBridge.placement impression:url];
     
     cordovaSuccess(self, command);
 }
