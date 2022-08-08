@@ -83,7 +83,7 @@
             <source url="https://cdn.cocoapods.org/"/>
         </config>
         <pods>
-            <pod name="AirBridge" spec="1.24.5" />
+            <pod name="AirBridge" spec="1.25.0" />
         </pods>
     </podspec>
 </platform>
