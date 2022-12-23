@@ -5,7 +5,7 @@ allprojects {
 }
 
 dependencies {
-	api 'io.airbridge:sdk-android:2.19.4'
+	api 'io.airbridge:sdk-android:2.19.5'
 	implementation 'com.android.installreferrer:installreferrer:2.2'
 	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 }
