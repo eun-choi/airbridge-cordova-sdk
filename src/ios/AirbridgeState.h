@@ -17,6 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateUser:(CDVInvokedUrlCommand*)command;
 - (void)startTracking:(CDVInvokedUrlCommand*)command;
 
+- (void)setDeviceAlias:(CDVInvokedUrlCommand*)command;
+- (void)removeDeviceAlias:(CDVInvokedUrlCommand*)command;
+- (void)clearDeviceAlias:(CDVInvokedUrlCommand*)command;
+
+- (void)registerPushToken:(CDVInvokedUrlCommand*)command;
+
 @end
 
 NS_ASSUME_NONNULL_END

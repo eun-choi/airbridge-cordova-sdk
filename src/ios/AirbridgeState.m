@@ -71,4 +71,62 @@
     [AirBridge startTracking];
 }
 
+- (void)setDeviceAlias:(CDVInvokedUrlCommand*)command {
+    NSDictionary* obj = [ACOGet type:NSDictionary.class array:command.arguments index:0];
+
+    NSString* key = [ACOGet type:NSString.class dictionary:obj key:@"key"];
+    NSString* value = [ACOGet type:NSString.class dictionary:obj key:@"value"];
+
+    if (key == nil) {
+        cordovaFail(self, command, @"key not found");
+        return;
+    }
+
+    if (value == nil) {
+        cordovaFail(self, command, @"value not found");
+        return;
+    }
+
+    [AirBridge.state setDeviceAliasWithKey:key value:value];
+    
+    cordovaSuccess(self, command);
+}
+
+- (void)removeDeviceAlias:(CDVInvokedUrlCommand*)command {
+    NSDictionary* obj = [ACOGet type:NSDictionary.class array:command.arguments index:0];
+
+    NSString* key = [ACOGet type:NSString.class dictionary:obj key:@"key"];
+
+    if (key == nil) {
+        cordovaFail(self, command, @"key not found");
+        return;
+    }
+
+    [AirBridge.state removeDeviceAliasWithKey:key];
+    
+    cordovaSuccess(self, command);
+}
+
+- (void)clearDeviceAlias:(CDVInvokedUrlCommand*)command {
+    [AirBridge.state clearDeviceAlias];
+
+    cordovaSuccess(self, command);
+}
+
+- (void)registerPushToken:(CDVInvokedUrlCommand*)command {
+    NSDictionary* obj = [ACOGet type:NSDictionary.class array:command.arguments index:0];
+
+    NSString* token = [ACOGet type:NSString.class dictionary:obj key:@"token"];
+
+    if (token == nil) {
+        cordovaFail(self, command, @"token not found");
+        return;
+    }
+
+    NSData* data = [token dataUsingEncoding:NSUTF8StringEncoding];
+    [AirBridge registerPushToken:data];
+    
+    cordovaSuccess(self, command);
+}
+
 @end

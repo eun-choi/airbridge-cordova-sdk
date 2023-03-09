@@ -24,173 +24,13 @@ public class AirbridgeEvent extends CordovaPlugin {
     // cordova method
     //
 
-    public void signIn(@Nullable JSONObject user, @Nullable JSONObject option) {
-        String ID = Get.type(String.class, user, "ID");
-        String email = Get.type(String.class, user, "email");
-        String phone = Get.type(String.class, user, "phone");
-        Map<String, String> alias = convertMap(Get.type(JSONObject.class, user, "alias"));
-        Map<String, Object> attributes = convertMap(Get.type(JSONObject.class, user, "attributes"));
-
-        Airbridge.getCurrentUser().setId(ID);
-        Airbridge.getCurrentUser().setEmail(email);
-        Airbridge.getCurrentUser().setPhone(phone);
-        if (alias != null) {
-            for (Map.Entry<String, String> entry : alias.entrySet()) {
-                Airbridge.getCurrentUser().setAlias(entry.getKey(), entry.getValue());
-            }
-        } else {
-            Airbridge.getCurrentUser().clearAlias();
+    public void trackEvent(@Nullable String category, @Nullable JSONObject option) {
+        if (category == null) {
+            return;
         }
-        if (attributes != null) {
-            for (Map.Entry<String, Object> entry : attributes.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-
-                if (value instanceof Integer) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Integer) value);
-                }
-                else if (value instanceof Long) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Long) value);
-                }
-                else if (value instanceof Float) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Float) value);
-                }
-                else if (value instanceof Double) {
-                    Airbridge.getCurrentUser().setAttribute(key, ((Double) value).floatValue());
-                }
-                else if (value instanceof Boolean) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Boolean) value);
-                }
-                else if (value instanceof String) {
-                    Airbridge.getCurrentUser().setAttribute(key, (String) value);
-                }
-            }
-        } else {
-            Airbridge.getCurrentUser().clearAttributes();
-        }
-
-        Event event = new Event(StandardEventCategory.SIGN_IN);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void signUp(@Nullable JSONObject user, @Nullable JSONObject option) {
-        String ID = Get.type(String.class, user, "ID");
-        String email = Get.type(String.class, user, "email");
-        String phone = Get.type(String.class, user, "phone");
-        Map<String, String> alias = convertMap(Get.type(JSONObject.class, user, "alias"));
-        Map<String, Object> attributes = convertMap(Get.type(JSONObject.class, user, "attributes"));
-
-        Airbridge.getCurrentUser().setId(ID);
-        Airbridge.getCurrentUser().setEmail(email);
-        Airbridge.getCurrentUser().setPhone(phone);
-        if (alias != null) {
-            for (Map.Entry<String, String> entry : alias.entrySet()) {
-                Airbridge.getCurrentUser().setAlias(entry.getKey(), entry.getValue());
-            }
-        } else {
-            Airbridge.getCurrentUser().clearAlias();
-        }
-        if (attributes != null) {
-            for (Map.Entry<String, Object> entry : attributes.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-
-                if (value instanceof Integer) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Integer) value);
-                }
-                else if (value instanceof Long) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Long) value);
-                }
-                else if (value instanceof Float) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Float) value);
-                }
-                else if (value instanceof Double) {
-                    Airbridge.getCurrentUser().setAttribute(key, ((Double) value).floatValue());
-                }
-                else if (value instanceof Boolean) {
-                    Airbridge.getCurrentUser().setAttribute(key, (Boolean) value);
-                }
-                else if (value instanceof String) {
-                    Airbridge.getCurrentUser().setAttribute(key, (String) value);
-                }
-            }
-        } else {
-            Airbridge.getCurrentUser().clearAttributes();
-        }
-
-        Event event = new Event(StandardEventCategory.SIGN_UP);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void signOut(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.SIGN_OUT);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-
-        Airbridge.expireUser();
-    }
-
-    public void viewHome(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.HOME_VIEW);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void viewSearchResult(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.SEARCH_RESULT_VIEW);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void viewProductList(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.PRODUCT_LIST_VIEW);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void viewProductDetail(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.PRODUCT_DETAILS_VIEW);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void addToCart(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.ADD_TO_CART);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void purchase(@Nullable JSONObject option) {
-        Event event = new Event(StandardEventCategory.ORDER_COMPLETED);
-
-        addOptionToEvent(event, option);
-
-        Airbridge.trackEvent(event);
-    }
-
-    public void custom(@Nonnull String category, @Nullable JSONObject option) {
+        
         Event event = new Event(category);
-
         addOptionToEvent(event, option);
-
         Airbridge.trackEvent(event);
     }
 
@@ -213,8 +53,8 @@ public class AirbridgeEvent extends CordovaPlugin {
         String action = Get.type(String.class, option, "action");
         String label = Get.type(String.class, option, "label");
         Float value = Get.type(Float.class, Get.type(Number.class, option, "value"));
-        Map<String, Object> attributes = convertMap(Get.type(JSONObject.class, option, "attributes"));
-        Map<String, Object> semantics = convertMap(Get.type(JSONObject.class, option, "semantics"));
+        Map<String, Object> attributes = convertMap(Get.type(JSONObject.class, option, "customAttributes"));
+        Map<String, Object> semantics = convertMap(Get.type(JSONObject.class, option, "semanticAttributes"));
 
         event.setAction(action);
         event.setLabel(label);
@@ -304,35 +144,8 @@ public class AirbridgeEvent extends CordovaPlugin {
 
     public boolean execute0(String action, JSONArray args, CallbackContext callbackContext) {
         switch (action) {
-            case "signIn":
-                signIn(args.optJSONObject(0), args.optJSONObject(1));
-                break;
-            case "signUp":
-                signUp(args.optJSONObject(0), args.optJSONObject(1));
-                break;
-            case "signOut":
-                signOut(args.optJSONObject(0));
-                break;
-            case "viewHome":
-                viewHome(args.optJSONObject(0));
-                break;
-            case "viewProductList":
-                viewProductList(args.optJSONObject(0));
-                break;
-            case "viewSearchResult":
-                viewSearchResult(args.optJSONObject(0));
-                break;
-            case "viewProductDetail":
-                viewProductDetail(args.optJSONObject(0));
-                break;
-            case "addToCart":
-                addToCart(args.optJSONObject(0));
-                break;
-            case "purchase":
-                purchase(args.optJSONObject(0));
-                break;
-            case "custom":
-                custom(args.optString(0), args.optJSONObject(1));
+            case "trackEvent":
+                trackEvent(args.optString(0), args.optJSONObject(1));
                 break;
             default:
                 return false;

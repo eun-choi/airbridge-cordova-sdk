@@ -1,19 +1,7 @@
 # airbridge-cordova-sdk
 
-## Cordova
+Airbridge SDK for Cordova
 
-```bash
-cordova plugin add airbridge-cordova-sdk
-```
+## usage
 
-## Ionic
-
-```bash
-ionic cordova plugin add airbridge-cordova-sdk
-```
-
-## PhoneGap
-
-```bash
-phonegap plugin add airbridge-cordova-sdk
-```
+<https://developers.airbridge.io/docs/cordova-ionic-phonegap-sdk>

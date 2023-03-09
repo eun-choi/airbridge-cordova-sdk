@@ -109,6 +109,37 @@ public class AirbridgeState extends CordovaPlugin {
         Airbridge.startTracking();
     }
 
+    public void setDeviceAlias(@Nullable JSONObject object) {
+        String key = Get.type(String.class, object, "key");
+        String value = Get.type(String.class, object, "value");
+
+        System.out.println("setDeviceAlias. key : " + key + ", value : " + value);
+
+        if (key != null && value != null) {
+            Airbridge.setDeviceAlias(key, value);
+        }
+    }
+
+    public void removeDeviceAlias(@Nullable JSONObject object) {
+        String key = Get.type(String.class, object, "key");
+
+        if (key != null) {
+            Airbridge.removeDeviceAlias(key);
+        }
+    }
+
+    public void clearDeviceAlias() {
+        Airbridge.clearDeviceAlias();
+    }
+
+    public void registerPushToken(@Nullable JSONObject object) {
+        String token = Get.type(String.class, object, "token");
+
+        if (token != null) {
+            Airbridge.registerPushToken(token);
+        }
+    }
+
     //
     // private - tool
     //
@@ -164,6 +195,18 @@ public class AirbridgeState extends CordovaPlugin {
                 break;
             case "startTracking":
                 startTracking();
+                break;
+            case "setDeviceAlias":
+                setDeviceAlias(args.optJSONObject(0));
+                break;
+            case "removeDeviceAlias":
+                removeDeviceAlias(args.optJSONObject(0));
+                break;
+            case "clearDeviceAlias":
+                clearDeviceAlias();
+                break;
+            case "registerPushToken":
+                registerPushToken(args.optJSONObject(0));
                 break;
             default:
                 return false;

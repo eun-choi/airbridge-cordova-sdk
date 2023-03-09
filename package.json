@@ -1,10 +1,12 @@
 {
   "_from": "airbridge-cordova-sdk",
-  "_id": "airbridge-cordova-sdk@1.3.5",
+  "_id": "airbridge-cordova-sdk@2.1.1",
   "_inBundle": false,
-  "_integrity": "sha512-ppMSZoBVpy9H/ymMPaXONbNf5CjATGAV8eDpE/1rBWRmue+uE6WfBrMqw0/KAJtVVJDhKSB8vYrGxXjjRqj7Yw==",
+  "_integrity": "sha512-RpN0FsiXDk5xGzXvrbDMJBKPNoA5V2vLbcQbokK6glTeGA5zVEdczKAQq6J/f83eviJKGYmHZObgrpxBim20bw==",
   "_location": "/airbridge-cordova-sdk",
-  "_phantomChildren": {},
+  "_phantomChildren": {
+    "simple-plist": "1.1.1"
+  },
   "_requested": {
     "type": "tag",
     "registry": true,
@@ -16,15 +18,15 @@
     "fetchSpec": "latest"
   },
   "_requiredBy": [
-    "#USER",
-    "/"
+    "#DEV:/",
+    "#USER"
   ],
-  "_resolved": "https://registry.npmjs.org/airbridge-cordova-sdk/-/airbridge-cordova-sdk-1.3.5.tgz",
-  "_shasum": "718a766ebcb8f3f755d90bdcddca9f362b7ba3b2",
+  "_resolved": "https://registry.npmjs.org/airbridge-cordova-sdk/-/airbridge-cordova-sdk-2.1.1.tgz",
+  "_shasum": "e01fdb4a555c552910f2448272a80443f3f4ad3a",
   "_spec": "airbridge-cordova-sdk",
-  "_where": "/Volumes/EUN/tests",
+  "_where": "/Volumes/EUN/castme",
   "author": {
-    "name": "ab180"
+    "name": "AB180"
   },
   "bundleDependencies": false,
   "cordova": {
@@ -57,9 +59,8 @@
   "name": "airbridge-cordova-sdk",
   "scripts": {
     "lint": "eslint www",
-    "prepublishOnly": "sh ./tool/beforePublish.sh",
     "reference": "jsdoc www -r -d reference -c .jsdoc_conf.json"
   },
   "types": "www/Airbridge.d.ts",
-  "version": "1.3.5"
+  "version": "2.1.1"
 }
